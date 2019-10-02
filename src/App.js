@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { DisplayWeather } from './components/weather/display-weather';
 import { LandingPage } from './components/landing-page/landing-page';
-import {displatLatLong} from './components/display-lat-long/display-lat-long';
+import { DisplayLatLong } from './components/display-lat-long/display-lat-long';
 
 class App extends Component {
   render() {
@@ -10,7 +10,7 @@ class App extends Component {
       <div className="App"> 
         <LandingPage />
         <DisplayWeather location='Boston'/>
-        <displatLatLong />
+        <DisplayLatLong />
       </div>
     );
   }
