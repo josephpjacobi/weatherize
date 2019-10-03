@@ -1,5 +1,4 @@
 import React from 'react';
-import { weatherData } from './data';
 import { getLatLong } from '../../utils/get-lat-long';
 import { getWeatherData } from '../../utils/get-weather-data';
 
@@ -42,21 +41,16 @@ export class DisplayWeather extends React.Component {
     this.setSearchCity = this.setSearchCity.bind(this);
   }
 
-
+//To add more data log weather to get the key value names for desired data point and adjust currently object
   async getWeather() {
     const latLong = await getLatLong();
-    const city = this.state.searchCity;
-    const weather = getWeatherData(latLong);
-    console.log(weather);
-    
-    const newWeather = weatherData[city] || {currently: {
-      summary: `Not found for ${city}`,
-      precipProbability: `Not found for ${city}`,
-      windSpeed: `Not found for ${city}`,
-      city
+    const weather = await getWeatherData(latLong);
+    const newWeather =  { currently: {
+      summary: weather.currently.summary,
+      precipProbability: weather.currently.precipProbability,
+      windSpeed: weather.currently.windSpeed
       }
     }; 
-    
     this.setState({weather: newWeather});
   }
 
@@ -67,10 +61,10 @@ export class DisplayWeather extends React.Component {
   render() {
     return (
       <div>
+        <input type="text" value={this.state.searchCity} onChange={this.setSearchCity} />
         <button onClick={() => {this.getWeather()}}>
           Get Weather!
         </button> 
-        <input type="text" value={this.state.searchCity} onChange={this.setSearchCity}/>
       <div>
         <h1>Today's Weather in <strong>{this.state.weather.city}</strong> is:</h1>
         <h2>Weather type: {this.state.weather.currently.summary} </h2>

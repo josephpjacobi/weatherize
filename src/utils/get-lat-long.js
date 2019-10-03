@@ -1,8 +1,8 @@
 //Google API
 
-export async function getLatLong() {
+export async function getLatLong(location) {
   const url = 'https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyAlJFyBn5DLTB9ehxQn2J61pyvAZT5dk8o';
-
+  console.log(location)
   const coordinates = await fetch(url).then((response) => {
     if (response.ok) {
       return response.json();
