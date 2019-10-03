@@ -36,18 +36,19 @@ export class DisplayWeather extends React.Component {
         },
         "offset": -8
       },
-      searchCity: 'Anchorage'
+      searchCity: 'Mountain View, CA'
     }
 
     this.setSearchCity = this.setSearchCity.bind(this);
   }
 
 
-  getWeather() {
+  async getWeather() {
+    const latLong = await getLatLong();
     const city = this.state.searchCity;
-    const coordinates = { lat: 37.422208,
-                          long: -122.0842731};
-    const weather = getWeatherData(coordinates);
+    const weather = getWeatherData(latLong);
+    console.log(weather);
+    
     const newWeather = weatherData[city] || {currently: {
       summary: `Not found for ${city}`,
       precipProbability: `Not found for ${city}`,
