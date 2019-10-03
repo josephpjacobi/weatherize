@@ -45,8 +45,8 @@ export class DisplayWeather extends React.Component {
 
   getWeather() {
     const city = this.state.searchCity;
-    const coordinates = getLatLong(city);
-    console.log(coordinates);
+    const coordinates = { lat: 37.422208,
+                          long: -122.0842731};
     const weather = getWeatherData(coordinates);
     const newWeather = weatherData[city] || {currently: {
       summary: `Not found for ${city}`,
