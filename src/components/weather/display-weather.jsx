@@ -1,5 +1,4 @@
 import React from 'react';
-import { weatherData } from './data';
 import { getLatLong } from '../../utils/get-lat-long';
 import { getWeatherData } from '../../utils/get-weather-data';
 
@@ -45,17 +44,16 @@ export class DisplayWeather extends React.Component {
 
   async getWeather() {
     const latLong = await getLatLong();
-    const city = this.state.searchCity;
-    const weather = getWeatherData(latLong);
-    console.log(weather);
+    const weather = await getWeatherData(latLong);
     
-    const newWeather = weatherData[city] || {currently: {
-      summary: `Not found for ${city}`,
-      precipProbability: `Not found for ${city}`,
-      windSpeed: `Not found for ${city}`,
-      city
+    const newWeather =  { currently: {
+      summary: weather.currently.summary,
+      precipProbability: weather.currently.precipProbability,
+      windSpeed: weather.currently.windSpeed
       }
     }; 
+    console.log(newWeather);
+    
     
     this.setState({weather: newWeather});
   }
