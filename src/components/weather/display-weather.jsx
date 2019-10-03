@@ -41,20 +41,16 @@ export class DisplayWeather extends React.Component {
     this.setSearchCity = this.setSearchCity.bind(this);
   }
 
-
+//To add more data log weather to get the key value names for desired data point and adjust currently object
   async getWeather() {
     const latLong = await getLatLong();
     const weather = await getWeatherData(latLong);
-    
     const newWeather =  { currently: {
       summary: weather.currently.summary,
       precipProbability: weather.currently.precipProbability,
       windSpeed: weather.currently.windSpeed
       }
     }; 
-    console.log(newWeather);
-    
-    
     this.setState({weather: newWeather});
   }
 
@@ -65,10 +61,10 @@ export class DisplayWeather extends React.Component {
   render() {
     return (
       <div>
+        <input type="text" value={this.state.searchCity} onChange={this.setSearchCity} />
         <button onClick={() => {this.getWeather()}}>
           Get Weather!
         </button> 
-        <input type="text" value={this.state.searchCity} onChange={this.setSearchCity}/>
       <div>
         <h1>Today's Weather in <strong>{this.state.weather.city}</strong> is:</h1>
         <h2>Weather type: {this.state.weather.currently.summary} </h2>
