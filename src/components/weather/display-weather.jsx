@@ -1,5 +1,7 @@
 import React from 'react';
-import {weatherData} from './data';
+import { weatherData } from './data';
+import { getLatLong } from '../../utils/get-lat-long';
+import { getWeatherData } from '../../utils/get-weather-data';
 
 
 export class DisplayWeather extends React.Component {
@@ -34,14 +36,19 @@ export class DisplayWeather extends React.Component {
         },
         "offset": -8
       },
-      searchCity: 'Anchorage'
+      searchCity: 'Mountain View, CA'
     }
 
     this.setSearchCity = this.setSearchCity.bind(this);
   }
 
-  getWeather() {
+
+  async getWeather() {
+    const latLong = await getLatLong();
     const city = this.state.searchCity;
+    const weather = getWeatherData(latLong);
+    console.log(weather);
+    
     const newWeather = weatherData[city] || {currently: {
       summary: `Not found for ${city}`,
       precipProbability: `Not found for ${city}`,
