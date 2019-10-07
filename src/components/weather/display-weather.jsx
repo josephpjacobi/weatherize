@@ -35,7 +35,7 @@ export class DisplayWeather extends React.Component {
         },
         "offset": -8
       },
-      searchCity: 'Mountain View, CA'
+      searchCity: 'Bayville'
     }
 
     this.setSearchCity = this.setSearchCity.bind(this);
@@ -43,13 +43,16 @@ export class DisplayWeather extends React.Component {
 
 //To add more data log weather to get the key value names for desired data point and adjust currently object
   async getWeather() {
-    const latLong = await getLatLong();
-    const weather = await getWeatherData(latLong);
-    const newWeather =  { currently: {
-      summary: weather.currently.summary,
-      precipProbability: weather.currently.precipProbability,
-      windSpeed: weather.currently.windSpeed
-      }
+    const search = this.state.searchCity;
+    const latLong = await getLatLong(search);
+    const weather = await getWeatherData(latLong.coordinates);
+    const newWeather =  { 
+      city: latLong.location,
+      currently: {
+        summary: weather.currently.summary,
+        precipProbability: weather.currently.precipProbability,
+        windSpeed: weather.currently.windSpeed
+        }
     }; 
     this.setState({weather: newWeather});
   }
