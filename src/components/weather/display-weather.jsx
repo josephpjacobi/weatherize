@@ -35,7 +35,7 @@ export class DisplayWeather extends React.Component {
         },
         "offset": -8
       },
-      searchCity: 'Bayville'
+      searchCity: props.location
     }
 
     this.setSearchCity = this.setSearchCity.bind(this);

@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     return (
       <div className="App"> 
-        <DisplayWeather location='Boston'/>
+        <DisplayWeather location='X'/>
       </div>
     );
   }
