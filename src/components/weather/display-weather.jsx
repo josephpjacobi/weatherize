@@ -3,6 +3,7 @@ import { getLatLong } from '../../utils/get-lat-long';
 import { getWeatherData } from '../../utils/get-weather-data';
 
 
+
 export class DisplayWeather extends React.Component {
   constructor(props) {
     super(props)
@@ -45,7 +46,8 @@ export class DisplayWeather extends React.Component {
   async getWeather() {
     const search = this.state.searchCity;
     const latLong = await getLatLong(search);
-    const weather = await getWeatherData(latLong.coordinates);
+    
+    const weather = await getWeatherData(latLong.coordinates, latLong.place_id);
     const newWeather =  { 
       city: latLong.location,
       currently: {
